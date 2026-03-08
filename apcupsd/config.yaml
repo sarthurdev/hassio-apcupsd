@@ -1,0 +1,17 @@
+name: "apcupsd"
+description: "Custom apcupsd addon"
+version: "1.0.0"
+slug: "apcupsd"
+init: false
+arch:
+  - amd64
+startup: "services"
+host_network: true
+options:
+  cable: "usb"
+  type: "usb"
+  device: ""
+schema:
+  cable: str
+  type: str
+  device: str

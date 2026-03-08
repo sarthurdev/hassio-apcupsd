@@ -1,0 +1,23 @@
+Description: Add support for output current in snmp driver
+--- a/src/drivers/snmplite/apc-mib.cpp
++++ b/src/drivers/snmplite/apc-mib.cpp
+@@ -66,6 +66,7 @@
+    {CI_BADBATTS,        upsAdvBatteryNumOfBadBattPacks,  INTEGER,     true },
+    {CI_VMIN,            upsAdvInputMinLineVoltage,       GAUGE,       true },
+    {CI_VMAX,            upsAdvInputMaxLineVoltage,       GAUGE,       true },
++   {CI_OutputCurrent,   upsAdvOutputCurrent,             INTEGER,     true },
+ 
+    // These 5 collectively are used to obtain the data for CI_STATUS.
+    // All bits are available in upsBasicStateOutputState at once but 
+@@ -101,6 +102,11 @@
+ 
+    switch (ci)
+    {
++   case CI_OutputCurrent:
++      Dmsg(80, "Got CI_OutputCurrent: %d\n", data.u32);
++      ups->OutputCurrent = data.u32;
++      break;
++
+    case CI_VLINE:
+       Dmsg(80, "Got CI_VLINE: %d\n", data.u32);
+       ups->LineVoltage = data.u32;
